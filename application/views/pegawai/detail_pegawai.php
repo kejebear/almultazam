@@ -300,7 +300,7 @@ foreach ($pegawai as $peg){
 												<div class="panel-body">
 													<div class="row">
 														<div class="col-md-4 center">
-															<img src="<?php echo base_url('assets/img/avatar1.png');?>" alt="..." class="img-thumbnail">
+															<img src="<?php echo base_url('assets/img/none.jpg');?>" alt="..." class="img-thumbnail">
 															<img src="<?php echo site_url();?>/<?php echo $this->uri->segment(1);?>/set_barcode/<?php echo $peg->nrp;?>">
 														</div>
 														<div class="col-md-8">
