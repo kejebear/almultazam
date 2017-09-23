@@ -240,6 +240,7 @@ class Pegawai extends CI_Controller {
 		//menampilkan tampilan footer
 		$this->load->view('template/footer');
 	}
+
 	
 	
 	//fungsi untuk edit data pegawai
@@ -630,5 +631,15 @@ class Pegawai extends CI_Controller {
 		
 		//menampilkan tampilan footer
 		$this->load->view('template/footer');
+	}
+
+
+	public function set_barcode($kode){
+
+		$this->load->library('zend');
+ 
+		$this->zend->load('Zend/Barcode');
+  
+		Zend_Barcode::render('code39', 'image', array('text'=>$kode), array());
 	}
 }
