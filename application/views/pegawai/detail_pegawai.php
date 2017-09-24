@@ -320,6 +320,16 @@ foreach ($pegawai as $peg){
 																	<td>:</td>
 																	<td><?php echo $peg->alamat; ?> <?php echo $peg->kel; ?> <?php echo $peg->kec; ?> <?php echo $peg->kota; ?></td>
 																</tr>
+																<tr>
+																	<td></td>
+																	<td></td>
+																	<td>
+																		<a href="<?php echo base_url("pegawai/pdf_idcard/".$peg->nrp);?>" target="blank" class="btn btn-block btn-social btn-bitbucket">
+																			<i class="fa fa-print"></i> Cetak
+																		</a>
+
+																	</td>
+																</tr>
 															</table>
 														</div>
 													</div>
@@ -337,4 +347,5 @@ foreach ($pegawai as $peg){
 			</div>
 		</form>
 	</div>
+
 	<?php } ?>

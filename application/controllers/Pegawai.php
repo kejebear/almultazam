@@ -4,7 +4,7 @@ class Pegawai extends CI_Controller {
 	function __construct() {
 		parent::__construct();
 		$this->load->helper('url');
-        $this->load->library('pagination');
+		$this->load->library('pagination');
 		if (!isset($this->session->userdata['id_pengguna'])) {
 			redirect(base_url("login"));
 		}
@@ -17,7 +17,7 @@ class Pegawai extends CI_Controller {
 	public function pegawai(){
 		//menampilkan tampilan header konten
 		$this->load->view('template/header');
-	
+
 		$this->load->view('pegawai/pegawai');
 		
 		//menampilkan tampilan footer
@@ -31,7 +31,7 @@ class Pegawai extends CI_Controller {
 		$this->load->view('template/header');
 		$hariini=date("Y");
 		$sub=substr($hariini,2,2);
-        $jpeg = $this->m_models->getRows('pegawai');
+		$jpeg = $this->m_models->getRows('pegawai');
 		//menambahkan angka nol
 		if($jpeg < 10) {
 			$nourut = '000'.$jpeg;
@@ -43,12 +43,12 @@ class Pegawai extends CI_Controller {
 			$nourut = $jpeg;
 		}
 		$data['nrp']="$sub$nourut";
-        $data['jabatan'] = $this->m_models->getAll('jabatan');
-        $data['pangkat'] = $this->m_models->getAll('golongan');
-        $data['kontrak_kerja'] = $this->m_models->getAll('kontrak');
-        $data['tingkat_pend'] = $this->m_models->getAll('tingkat_pendidikan');
-        $data['profesi'] = $this->m_models->getAll('profesi');
-        $data['penempatan'] = $this->m_models->getAll('sekolah order by nama');
+		$data['jabatan'] = $this->m_models->getAll('jabatan');
+		$data['pangkat'] = $this->m_models->getAll('golongan');
+		$data['kontrak_kerja'] = $this->m_models->getAll('kontrak');
+		$data['tingkat_pend'] = $this->m_models->getAll('tingkat_pendidikan');
+		$data['profesi'] = $this->m_models->getAll('profesi');
+		$data['penempatan'] = $this->m_models->getAll('sekolah order by nama');
 		$this->load->view('pegawai/f_pegawai',$data);
 
 		//menampilkan tampilan footer
@@ -64,7 +64,7 @@ class Pegawai extends CI_Controller {
 		//menampilkan tampilan header konten
 		$this->load->view('template/header');
 		
-        $nip = $this->input->post('nip');
+		$nip = $this->input->post('nip');
 		$nuptk = $this->input->post('nuptk');
 		$nrp = $this->input->post('nrp');
 		$no_ktp = $this->input->post('no_ktp');
@@ -169,39 +169,39 @@ class Pegawai extends CI_Controller {
 	function lihat_pegawai(){
 		//menampilkan tampilan header konten
 		$this->load->view('template/header');
-			$no_link = $this->uri->segment(3);
-			$config['base_url'] = site_url('pegawai/lihat_pegawai');
-            $config['total_rows'] = $this->m_models->getRows("pegawai");
-            $config['per_page'] = 10; 
-			$config['use_page_numbers'] = TRUE;
- 
-            $config['num_links'] = 5;
-            $config['full_tag_open'] = '<ul class="pagination">';
-            $config['full_tag_close'] = '</ul>';
-            $config['first_link'] = false;
-            $config['last_link'] = false;
-            $config['first_tag_open'] = '<li>';
-            $config['first_tag_close'] = '</li>';
-            $config['prev_link'] = '&laquo';
-            $config['prev_tag_open'] = '<li class="prev">';
-            $config['prev_tag_close'] = '</li>';
-            $config['next_link'] = '&raquo';
-            $config['next_tag_open'] = '<li>';
-            $config['next_tag_close'] = '</li>';
-            $config['last_tag_open'] = '<li>';
-            $config['last_tag_close'] = '</li>';
-            $config['cur_tag_open'] = '<li class="active"><a href="#">';
-            $config['cur_tag_close'] = '</a></li>';
-            $config['num_tag_open'] = '<li>';
-            $config['num_tag_close'] = '</li>';
-			
-            $this->pagination->initialize($config);
-			
-			if ($no_link==""){
-				$nolink=1;
-			} else {
-				$nolink=($no_link*$config['per_page'])-($config['per_page']-1);
-			}
+		$no_link = $this->uri->segment(3);
+		$config['base_url'] = site_url('pegawai/lihat_pegawai');
+		$config['total_rows'] = $this->m_models->getRows("pegawai");
+		$config['per_page'] = 10; 
+		$config['use_page_numbers'] = TRUE;
+
+		$config['num_links'] = 5;
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
+		$config['first_link'] = false;
+		$config['last_link'] = false;
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['prev_link'] = '&laquo';
+		$config['prev_tag_open'] = '<li class="prev">';
+		$config['prev_tag_close'] = '</li>';
+		$config['next_link'] = '&raquo';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a href="#">';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+
+		$this->pagination->initialize($config);
+
+		if ($no_link==""){
+			$nolink=1;
+		} else {
+			$nolink=($no_link*$config['per_page'])-($config['per_page']-1);
+		}
 		//$data['pegawai'] = $this->m_models->getAll('pegawai join jabatan on jabatan.id_jabatan=pegawai.id_jabatan order by nama asc');
 		$data['pegawai'] = $this->m_models->getAllPaging('pegawai join jabatan on jabatan.id_jabatan=pegawai.id_jabatan order by nama asc limit', $nolink, $config['per_page']);
 		$data['link'] = $this->pagination->create_links();
@@ -212,13 +212,14 @@ class Pegawai extends CI_Controller {
 	}
 
 	function get_pegawai() {
-        header('Content-Type: application/json');
-        echo $this->m_models->get_pegawai();
-    }
+		header('Content-Type: application/json');
+		echo $this->m_models->get_pegawai();
+	}
 
 	
 	//fungsi untuk detail data pegawai
 	public function detail_pegawai($nrp){
+
 		//menampilkan tampilan header konten
 		$this->load->view('template/header');
 		$nrp = $this->uri->segment(3);
@@ -260,9 +261,9 @@ class Pegawai extends CI_Controller {
 		$data['kontrak'] = $this->m_models->getAll("kontrak");
 		$data['penempatan'] = $this->m_models->getAll("sekolah order by nama");
 		
-        $data['jabatan'] = $this->m_models->getAll('jabatan');
-        $data['pangkat'] = $this->m_models->getAll('golongan');
-        $data['tingkat_pend'] = $this->m_models->getAll('tingkat_pendidikan');
+		$data['jabatan'] = $this->m_models->getAll('jabatan');
+		$data['pangkat'] = $this->m_models->getAll('golongan');
+		$data['tingkat_pend'] = $this->m_models->getAll('tingkat_pendidikan');
 		$id_pend=$data['tingkat_pend'][0]->id_tp;
 		$data['rpend'] = $this->m_models->getAll("riwayat_pend_peg where nrp='$nrp' and id_tp='$id_tp'");
 		$this->load->view('pegawai/edit_pegawai',$data);
@@ -276,7 +277,7 @@ class Pegawai extends CI_Controller {
 		//menampilkan tampilan header konten
 		$this->load->view('template/header');
 		
-        $nip = $this->input->post('nip');
+		$nip = $this->input->post('nip');
 		$nuptk = $this->input->post('nuptk');
 		$nrp = $this->input->post('nrp');
 		$no_ktp = $this->input->post('no_ktp');
@@ -412,7 +413,7 @@ class Pegawai extends CI_Controller {
 		//$data['resign'] = $this->m_models->getJoin2whereIn("*", "pegawai" , "jabatan", "jabatan.id_jabatan=pegawai.id_jabatan", "resign", "resign on resign.nrp=pegawai.nrp", "pegawai.nrp", $id, "nama", "asc");
 		$data['resign'] = $this->m_models->getJoin2where("*", "pegawai" , "jabatan", "jabatan.id_jabatan=pegawai.id_jabatan", "resign", "resign on resign.nrp=pegawai.nrp","resign.status","Proses","nama","asc");
 		
-	
+
 		/*foreach ($data['mutasi'] as $mts){
 			$id_tmp=$mts->tmp_mutasi;
 			$id_jab=$mts->jab_mutasi;
@@ -522,8 +523,8 @@ class Pegawai extends CI_Controller {
 	
 	//fungsi untuk input mutasi pegawai
 	public function form_mutasi(){
-        $data['jabatan'] = $this->m_models->getAll('jabatan');
-        $data['penempatan'] = $this->m_models->getAll('sekolah order by nama');
+		$data['jabatan'] = $this->m_models->getAll('jabatan');
+		$data['penempatan'] = $this->m_models->getAll('sekolah order by nama');
 		$this->load->view('pegawai/form_mutasi',$data);
 	}
 	
@@ -531,8 +532,8 @@ class Pegawai extends CI_Controller {
 		//menampilkan tampilan header konten
 		$this->load->view('template/header');
 		$data['pegawai'] = $this->m_models->getAll("pegawai where status_aktf='Aktif' order by nama");
-        $data['jabatan'] = $this->m_models->getAll('jabatan');
-        $data['penempatan'] = $this->m_models->getAll('sekolah order by nama');
+		$data['jabatan'] = $this->m_models->getAll('jabatan');
+		$data['penempatan'] = $this->m_models->getAll('sekolah order by nama');
 		$this->load->view('pegawai/f_mutasi',$data);
 
 		//menampilkan tampilan footer
@@ -637,25 +638,31 @@ class Pegawai extends CI_Controller {
 	public function set_barcode($kode){
 
 		$this->load->library('zend');
- 
+
 		$this->zend->load('Zend/Barcode');
-  
-		Zend_Barcode::render('code39', 'image', array('text'=>$kode), array());
+
+		Zend_Barcode::render('code39', 'image', array('text' => $kode), array());
+		$file = Zend_Barcode::draw('code39', 'image', array('text' => $kode), array());
+		$store_image = imagepng($file,"barcode/{$kode}.png");
+		return $kode.'.png';
 	}
 
-	public function pdf()
+	public function pdf_idcard($nrp)
 	{
+		$nrp = $this->uri->segment(3);
+		$data['pegawai'] = $this->m_models->getAll("pegawai join jabatan on jabatan.id_jabatan=pegawai.id_jabatan where nrp='$nrp' order by nama asc");
+
 		$this->load->library('pdfgenerator');
- 
-		$data['users']=array(
+
+/*		$data['users']=array(
 			array('firstname'=>'Agung','lastname'=>'Setiawan','email'=>'ag@setiawan.com'),
 			array('firstname'=>'Hauril','lastname'=>'Maulida Nisfar','email'=>'hm@setiawan.com'),
 			array('firstname'=>'Akhtar','lastname'=>'Setiawan','email'=>'akh@setiawan.com'),
 			array('firstname'=>'Gitarja','lastname'=>'Setiawan','email'=>'git@setiawan.com')
-		);
- 
-	    $html = $this->load->view('table_report', $data, true);
-	    
-	    $this->pdfgenerator->generate($html,'contoh');
+		);*/
+
+		$html = $this->load->view('idcard_temp',$data,true);
+
+		$this->pdfgenerator->generate($html,'kartu identitas-'.$nrp);
 	}
 }
