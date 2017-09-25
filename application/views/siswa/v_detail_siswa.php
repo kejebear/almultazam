@@ -36,6 +36,7 @@ error_reporting(0);
                           <li><a href="#dkembang" data-toggle="tab">Perkembangan</a></li>
                           <li><a href="#dlanjut" data-toggle="tab">Melanjutkan</a></li>
                           <li><a href="#dpindah" data-toggle="tab">Pindah/Keluar</a></li>
+                          <li><a href="#kitas" data-toggle="tab">KITAS</a></li>
                 </ul>
                 <div class="tab-content no-padding">
                   <!-- Form Data Siswa -->
@@ -1150,9 +1151,64 @@ error_reporting(0);
               }
               ?>
                   
+<!-- ID CARD -->
+            <div class="tab-pane"  id="kitas">
+              <div class="box-body">
 
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="panel panel-primary">
+                        <div class="panel-heading">Kartu Identitas</div>
+                        <div class="panel-body">
+                          <div class="row">
+                            <div class="col-md-4 center">
+                              <img src="<?php echo base_url('assets/img/none.jpg');?>" alt="..." class="img-thumbnail">
+                              <img src="<?php echo site_url();?>/<?php echo $this->uri->segment(1);?>/set_barcode/<?php echo $dtl->nis; ?>">
+                            </div>
+                            <div class="col-md-8">
+                              <?php foreach ($qsiswa as $dtl) {?>
+                              <table class="table">
+                                <tr>
+                                  <td>Nama</td>
+                                  <td>:</td>
+                                  <td><?php echo $dtl->nama_lengkap; ?></td>
+                                </tr>
+                                <tr>
+                                  <td>Tempat/Tgl. Lahir</td>
+                                  <td>:</td>
+                                  <td><?php echo $dtl->tempat_lahir; ?>, <?php echo $dtl->tanggal_lahir; ?></td>
+                                </tr>
+                                <tr>
+                                  <td>Alamat</td>
+                                  <td>:</td>
+                                  <td><?php echo $dtl->jalan_asal; ?> <?php echo $dtl->desa_asal; ?> <?php echo $dtl->kec_asal; ?> <?php echo $dtl->kec_asal; ?></td>
+                                </tr>
+                                <tr>
+                                  <td></td>
+                                  <td></td>
+                                  <td>
+                                    <a href="<?php echo base_url("siswa/pdf_idcard_siswa/".$dtl->nis);?>" target="blank" class="btn btn-block btn-social btn-bitbucket">
+                                      <i class="fa fa-print"></i> Cetak
+                                    </a>
+
+                                  </td>
+                                </tr>
+                              </table>
+                              <?php } ?>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>    
+            </div>
 
                 </div>
+
               </div><!-- /.nav-tabs-custom -->
 
 

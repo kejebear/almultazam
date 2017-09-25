@@ -249,6 +249,32 @@ public function hapussiswa()
   
   }
 
+  public function set_barcode($kode){
+
+    $this->load->library('zend');
+
+    $this->zend->load('Zend/Barcode');
+
+    Zend_Barcode::render('code39', 'image', array('text' => $kode), array());
+    $file = Zend_Barcode::draw('code39', 'image', array('text' => $kode), array());
+    $store_image = imagepng($file,"barcode/siswa/{$kode}.png");
+    return $kode.'.png';
+  }
+
+  public function pdf_idcard_siswa($nis)
+  {
+    $nis = $this->uri->segment(3);
+
+    $data['qsiswa']=$this->t_siswa->tampil_dsiswa();
+
+    $this->load->library('pdfgenerator');
+
+    //$this->load->view('idcard_temp_siswa',$data);
+    $html = $this->load->view('idcard_temp_siswa',$data,true);
+
+    $this->pdfgenerator->generate($html,'kartu identitas siswa-'.$nis);
+  }
+
 
 }
 ?>
